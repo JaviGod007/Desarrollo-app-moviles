@@ -45,6 +45,35 @@ fun LoginScreen(onLoginClick: () -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             singleLine = true
         )
+        Spacer(modifier = Modifier.height(16.dp))
 
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Contraseña") },
+            visualTransformation = PasswordVisualTransformation(),
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        Button(
+            onClick = {
+                // Validacion si los textos etan vacios
+                if (usuario.isBlank() || password.isBlank()) {
+                    // Mostramos una alerta breve en pantalla
+                    Toast.makeText(contexto, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Si hay texto, ejecutamos la navegación
+                    onLoginClick()
+                }
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+        ) {
+            Text("Ingresar")
+        }
     }
 }
